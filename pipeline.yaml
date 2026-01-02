@@ -1,0 +1,28 @@
+steps:
+  - step: Segmentation
+    settings:
+      model: yolo
+      model_settings:
+        model: Riksarkivet/yolov9-lines-within-regions-1
+      generation_settings:
+        conf: 0.2  # Catch faint lines
+        
+  - step: TextRecognition
+    settings:
+      model: TrOCR
+      model_settings:
+        model: Riksarkivet/trocr-base-handwritten-hist-swe-2
+      generation_settings:
+        num_beams: 4
+        early_stopping: true      # Helps finish sentences cleanly.
+        repetition_penalty: 1.5   # Aggressively stops loops like "och och och".
+        length_penalty: 1.0       # Encourages the model not to cut sentences short.
+        temperature: 0.8          # slightly lowers creativity to reduce hallucinations.
+        max_length: 128           # Ensures it doesn't give up on long legal lines.
+        
+  - step: OrderLines
+  
+  - step: Export
+    settings:
+      format: txt
+      dest: outputs

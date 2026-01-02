@@ -5,6 +5,7 @@ This tool automatically transcribes 18th/19th-century Swedish handwriting (Kurre
 ## Prerequisites
 * **Mac/Linux** (Terminal access)
 * **Python 3.11** installed on your system.
+* **ImageMagick** installed on your system.
 
 ## Files Required
 Ensure these three files are in the same folder:
